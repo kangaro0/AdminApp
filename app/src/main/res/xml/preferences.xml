@@ -2,10 +2,10 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="Connectivity - disable permanently">
+        android:title="Connectivity - permanent deaktivieren">
 
         <CheckBoxPreference
-            android:key="KEY_DISABLE_NFC"
+            android:key="KEY_DISABLE_WIFI"
             android:title="Wifi"
             />
 
@@ -21,11 +21,18 @@
 
     </PreferenceCategory>
     <PreferenceCategory
-        android:title="Hidden apps">
+        android:title="Versteckte Apps">
 
         <Preference
             android:key="KEY_HIDDEN_APPS"
-            android:title="Click..."
+            android:title="Bitte klicken..."
             />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Einstellungen">
+
+        <EditTextPreference
+            android:key="KEY_CHANGE_PASSWORD"
+            android:title="Passwort ändern"/>
     </PreferenceCategory>
 </PreferenceScreen>

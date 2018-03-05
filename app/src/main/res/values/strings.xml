@@ -4,4 +4,7 @@
     <string name="KEY_DISABLE_BLUETOOTH">KEY_DISABLE_BLUETOOTH</string>
     <string name="KEY_DISABLE_NFC">KEY_DISABLE_NFC</string>
     <string name="KEY_HIDDEN_APPS">KEY_HIDDEN_APPS</string>
+    <string name="KEY_PASSWORD">KEY_PASSWORD</string>
+    <string name="KEY_PASSWORD_SET">KEY_PASSWORD_SET</string>
+    <string name="KEY_CHANGE_PASSWORD">KEY_CHANGE_PASSWORD</string>
 </resources>

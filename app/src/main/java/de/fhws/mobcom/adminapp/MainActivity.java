@@ -1,17 +1,26 @@
 package de.fhws.mobcom.adminapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.widget.CheckBox;
-
-import java.util.List;
+import android.text.InputType;
+import android.widget.EditText;
 
 /**
  * Created by kanga on 02.03.2018.
@@ -21,11 +30,135 @@ public class MainActivity extends Activity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences( getApplicationContext() );
+            String action = intent.getAction();
+            switch( action ){
+                case WifiManager.WIFI_STATE_CHANGED_ACTION:
+                    if( preferences.getBoolean( getString( R.string.KEY_DISABLE_WIFI ), false ) ) {
+                        WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+                        if (wifiManager.isWifiEnabled())
+                            wifiManager.setWifiEnabled(false);
+                    }
+                    break;
+                case BluetoothAdapter.ACTION_STATE_CHANGED:
+                    if( preferences.getBoolean( getString( R.string.KEY_DISABLE_BLUETOOTH ), false ) ) {
+                        BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+                        if (bluetoothManager.getAdapter().isEnabled())
+                            bluetoothManager.getAdapter().disable();
+                    }
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate( Bundle savedInstance ) {
         super.onCreate( savedInstance );
         setContentView( R.layout.activity_main );
+
+        initReceiver();
+        initPasswordProtection();
+
         getFragmentManager().beginTransaction().replace( R.id.activity_main, new MainPreferenceFragment() ).commit();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        showPasswordDialog().show();
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        unregisterReceiver( mBroadcastReceiver );
+    }
+
+    private void initPasswordProtection(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences( getApplicationContext() );
+        if( preferences.getBoolean( getString( R.string.KEY_PASSWORD_SET ), false ) ){
+            return;
+        } else {
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean( getString( R.string.KEY_PASSWORD_SET ), true );
+            editor.putString( getString( R.string.KEY_PASSWORD ), "fhws" );
+            editor.commit();
+        }
+    }
+
+    private Dialog showPasswordDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder( this );
+        builder.setTitle( "Bitte Passwort eingeben:" );
+
+        final EditText editText = new EditText( this );
+        editText.setInputType( InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD );
+
+        builder.setView( editText );
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if( isPasswordCorrect( editText.getText().toString() ) ){
+                    return;
+                } else {
+                    showPasswordDenied();
+                }
+            }
+        });
+        builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finishAffinity();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+       return dialog;
+    }
+
+    private void showPasswordDenied(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder( this );
+        dialog.setTitle( "Falsches Passwort" );
+
+        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finishAffinity();
+            }
+        });
+        dialog.show();
+    }
+
+    private boolean isPasswordCorrect( String password ){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences( getApplicationContext() );
+        if( preferences.getString( getString( R.string.KEY_PASSWORD ), "" ).equals( password ) )
+            return true;
+        return false;
+    }
+
+    private void initReceiver(){
+        IntentFilter wifiFilter = new IntentFilter();
+        wifiFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        registerReceiver(mBroadcastReceiver, wifiFilter);
+
+        IntentFilter bluetoothFilter = new IntentFilter();
+        bluetoothFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+        registerReceiver(mBroadcastReceiver, bluetoothFilter);
+    }
+
+    private void changeNfcState(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences( this );
+        /*
+        if( preferences.getBoolean( getString( R.string.KEY_DISABLE_NFC ), false  ) ) {
+            PackageManager pm = getPackageManager();
+            pm.setApplicationEnabledSetting( "com.android.nfc", PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP );
+        } else {
+            PackageManager pm = getPackageManager();
+            pm.setApplicationEnabledSetting( "com.android.nfc", PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP );
+        }
+        */
     }
 
     public static class MainPreferenceFragment extends PreferenceFragment
@@ -37,6 +170,7 @@ public class MainActivity extends Activity {
         private CheckBoxPreference mBluetoothDisabled;
         private CheckBoxPreference mNfcDisabled;
         private Preference mHiddenApps;
+        private EditTextPreference mChangePassword;
 
         @Override
         public void onCreate( Bundle savedInstance ){
@@ -62,14 +196,26 @@ public class MainActivity extends Activity {
             mNfcDisabled.setOnPreferenceClickListener( this );
             mNfcDisabled.setChecked( mPreferences.getBoolean( getString( R.string.KEY_DISABLE_NFC ), false ) );
 
-
             mHiddenApps = ( Preference ) findPreference( getString( R.string.KEY_HIDDEN_APPS ) );
             mHiddenApps.setOnPreferenceClickListener( this );
+
+            mChangePassword = ( EditTextPreference ) findPreference( getString( R.string.KEY_CHANGE_PASSWORD ) );
+            mChangePassword.setOnPreferenceChangeListener( this );
+            mChangePassword.setOnPreferenceClickListener( this );
         }
 
         @Override
         public boolean onPreferenceChange(Preference preference, Object o) {
-            return false;
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences( getActivity().getApplicationContext() );
+            SharedPreferences.Editor editor = preferences.edit();
+
+            if( mChangePassword == preference ){
+                String newPassword = ( String ) o;
+                editor.putString( getString( R.string.KEY_PASSWORD ), newPassword );
+            }
+
+            editor.commit();
+            return true;
         }
 
         @Override
@@ -89,14 +235,17 @@ public class MainActivity extends Activity {
                 editor.commit();
             } else if( mNfcDisabled == preference ){
                 boolean oldValue = mPreferences.getBoolean( getString( R.string.KEY_DISABLE_NFC ), false );
-                mBluetoothDisabled.setChecked( !oldValue );
+                mNfcDisabled.setChecked( !oldValue );
                 editor.putBoolean( getString( R.string.KEY_DISABLE_NFC ), !oldValue );
                 editor.commit();
             } else if( mHiddenApps == preference ){
                 // start PackageActivity
                 Intent intent = new Intent( getActivity(), PackageActivity.class );
                 startActivity( intent );
+            } else if( mChangePassword == preference ){
+
             }
+
             return true;
         }
     }
