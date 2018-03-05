@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>70</y>
+      <w>330</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>*MainActivity*
+--
+- BroadcastReceiver mReceiver
+--
+# onCreate( Bundle savedInstance )
+# onResume( ): void
+# onDestroy( ): void
+- initPasswordProtection( ): void
+- showPasswordDialog( ): void
+- showPasswordDenied( ): void
+- isPasswordCorrect( String password ): boolean
+- initReceiver( ): void
+- changeNfcState( ): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>370</y>
+      <w>370</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>*MainFragment*
+--
+- SharedPreferences mPreferences
+- CheckBoxPreference mWifiDisabled
+- CheckBoxPreference mBluetoothDisabled
+- CheckBoxPreference mNfcDisabled
+- Preference mHiddenApps
+- EditTextPreference mChangePassword
+--
++ onCreate( Bundle savedInstance ): void
++ onPreferenceChange( Preference p, Object o ): void
++ onPreferenceClick( Preference p ): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>170</x>
+      <y>270</y>
+      <w>70</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+has &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>470</x>
+      <y>70</y>
+      <w>310</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>*PackageActivity*
+--
+# onCreate( Bundle savedInstance ): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>430</x>
+      <y>220</y>
+      <w>360</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>*PackageFragment*
+--
+- PackageProviderAdapter mProviderAdapter
+--
++ onCreate( Bundle savedInstance ): void
++ onCreateView( .. ): View
++ onActivityCreated( Bundle savedInstance ): void
++ onPause( ): void
++ onListItemClick( .. ): void
+- renewListAdapter( ): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>790</x>
+      <y>430</y>
+      <w>340</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>*PackageProvider*
+--
+_- String PROVIDER_NAME_
+_- String URL_
+_- Uri CONTENT_URL_
+_- String id_
+_- String name_
+_- String label_
+_- int ALL_
+_- int SINGLE_
+_- HashMap&lt;string, string&gt; values_
+_- String DATABASE_NAME_
+_- String TABLE_NAME_
+_- int DATABASE_VERSION_
+_- String CREATE_DB_TABLE_
+--
++ onCreate( ): boolean
++ getType( Uri uri ): String
++ query( .. ): Cursor
++ insert( .. ): Uri
++ delete( .. ): int
++ update( .. ): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>430</x>
+      <y>500</y>
+      <w>290</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>*PackageProviderAdapter*
+--
+_- Uri CONTENT_URL_
+- Context mContext
+- ContentResolver mContentResolver
+- ArrayList&lt;Package&gt; mPackages
+--
++ PackageProviderAdapter( Context context ): void
+- init( ): void
+- printCurrentPackages( ): void
+- has( Package pack ): boolean
+- has( String name ): boolean
++ getAll( ): ArrayList&lt;Package&gt;
++ getByName( String name ): Package
++ insert( Package pack ): void
++ delete( String name ): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>630</y>
+      <w>240</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>*Package*
+--
++ String mId
++ String mName
++ String mLabel
++ Drawable mIcon
++ boolean mIsHidden
+--
++ Package( .. ): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>620</x>
+      <y>130</y>
+      <w>70</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+has &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>410</y>
+      <w>70</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+has &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>670</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..n
+&lt; has </panel_attributes>
+    <additional_attributes>130.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>540</y>
+      <w>100</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+&lt; has</panel_attributes>
+    <additional_attributes>10.0;20.0;80.0;20.0</additional_attributes>
+  </element>
+</diagram>

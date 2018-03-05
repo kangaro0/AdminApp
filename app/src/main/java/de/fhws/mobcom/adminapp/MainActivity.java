@@ -11,7 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -62,7 +61,7 @@ public class MainActivity extends Activity {
         initReceiver();
         initPasswordProtection();
 
-        getFragmentManager().beginTransaction().replace( R.id.activity_main, new MainPreferenceFragment() ).commit();
+        getFragmentManager().beginTransaction().replace( R.id.activity_main, new MainFragment() ).commit();
     }
 
     @Override
@@ -161,10 +160,10 @@ public class MainActivity extends Activity {
         */
     }
 
-    public static class MainPreferenceFragment extends PreferenceFragment
+    public static class MainFragment extends PreferenceFragment
         implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
-        SharedPreferences mPreferences;
+        private SharedPreferences mPreferences;
 
         private CheckBoxPreference mWifiDisabled;
         private CheckBoxPreference mBluetoothDisabled;
