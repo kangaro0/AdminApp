@@ -35,18 +35,17 @@ public class MainActivity extends Activity {
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences( getApplicationContext() );
             String action = intent.getAction();
             switch( action ){
                 case WifiManager.WIFI_STATE_CHANGED_ACTION:
-                    if( preferences.getBoolean( getString( R.string.KEY_DISABLE_WIFI ), false ) ) {
+                    if( mPreferences.getBoolean( getString( R.string.KEY_DISABLE_WIFI ), false ) ) {
                         WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
                         if (wifiManager.isWifiEnabled())
                             wifiManager.setWifiEnabled(false);
                     }
                     break;
                 case BluetoothAdapter.ACTION_STATE_CHANGED:
-                    if( preferences.getBoolean( getString( R.string.KEY_DISABLE_BLUETOOTH ), false ) ) {
+                    if( mPreferences.getBoolean( getString( R.string.KEY_DISABLE_BLUETOOTH ), false ) ) {
                         BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
                         if (bluetoothManager.getAdapter().isEnabled())
                             bluetoothManager.getAdapter().disable();
@@ -60,7 +59,7 @@ public class MainActivity extends Activity {
     protected void onCreate( Bundle savedInstance ) {
         super.onCreate( savedInstance );
         setContentView( R.layout.activity_main );
-        
+
         mPreferences = getSharedPreferences( "AdminApp", MODE_PRIVATE );
 
         initReceiver();
