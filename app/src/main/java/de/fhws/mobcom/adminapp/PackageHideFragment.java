@@ -21,9 +21,9 @@ import de.fhws.mobcom.adminapp.model.Package;
  * Created by kanga on 27.02.2018.
  */
 
-public class PackageFragment extends ListFragment {
+public class PackageHideFragment extends ListFragment {
 
-    private static final String TAG = PackageFragment.class.getSimpleName();
+    private static final String TAG = PackageHideFragment.class.getSimpleName();
 
     private PackageProviderAdapter mProviderAdapter;
 
@@ -34,7 +34,7 @@ public class PackageFragment extends ListFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ){
+    public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ){
         renewListAdapter();
 
         return super.onCreateView( inflater, container, savedInstanceState );

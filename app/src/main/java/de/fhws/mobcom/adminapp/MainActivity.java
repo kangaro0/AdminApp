@@ -169,6 +169,7 @@ public class MainActivity extends Activity {
         private CheckBoxPreference mBluetoothDisabled;
         private CheckBoxPreference mNfcDisabled;
         private Preference mHiddenApps;
+        private Preference mDeactviatedApps;
         private EditTextPreference mChangePassword;
 
         @Override
@@ -197,6 +198,9 @@ public class MainActivity extends Activity {
 
             mHiddenApps = ( Preference ) findPreference( getString( R.string.KEY_HIDDEN_APPS ) );
             mHiddenApps.setOnPreferenceClickListener( this );
+
+            mDeactviatedApps = ( Preference ) findPreference( getString( R.string.KEY_DEACTIVATED_APPS ) );
+            mDeactviatedApps.setOnPreferenceClickListener( this );
 
             mChangePassword = ( EditTextPreference ) findPreference( getString( R.string.KEY_CHANGE_PASSWORD ) );
             mChangePassword.setOnPreferenceChangeListener( this );
@@ -237,9 +241,14 @@ public class MainActivity extends Activity {
                 mNfcDisabled.setChecked( !oldValue );
                 editor.putBoolean( getString( R.string.KEY_DISABLE_NFC ), !oldValue );
                 editor.commit();
-            } else if( mHiddenApps == preference ){
+            } else if( mHiddenApps == preference ) {
                 // start PackageActivity
+                Intent intent = new Intent(getActivity(), PackageActivity.class );
+                intent.putExtra("Fragment", "Hide");
+                startActivity(intent);
+            } else if( mDeactviatedApps == preference ){
                 Intent intent = new Intent( getActivity(), PackageActivity.class );
+                intent.putExtra( "Fragment", "Deactivate" );
                 startActivity( intent );
             } else if( mChangePassword == preference ){
 

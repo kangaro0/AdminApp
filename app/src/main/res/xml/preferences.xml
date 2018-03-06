@@ -21,11 +21,16 @@
 
     </PreferenceCategory>
     <PreferenceCategory
-        android:title="Versteckte Apps">
+        android:title="Apps">
 
         <Preference
             android:key="KEY_HIDDEN_APPS"
-            android:title="Bitte klicken..."
+            android:title="Apps verstecken"
+            />
+
+        <Preference
+            android:key="KEY_DEACTIVATED_APPS"
+            android:title="Apps deaktivieren"
             />
     </PreferenceCategory>
     <PreferenceCategory
