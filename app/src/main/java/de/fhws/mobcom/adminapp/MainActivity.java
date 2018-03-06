@@ -19,6 +19,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.text.InputType;
+import android.util.Log;
 import android.widget.EditText;
 
 /**
@@ -28,6 +29,8 @@ import android.widget.EditText;
 public class MainActivity extends Activity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+
+    private SharedPreferences mPreferences;
 
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -57,6 +60,8 @@ public class MainActivity extends Activity {
     protected void onCreate( Bundle savedInstance ) {
         super.onCreate( savedInstance );
         setContentView( R.layout.activity_main );
+        
+        mPreferences = getSharedPreferences( "AdminApp", MODE_PRIVATE );
 
         initReceiver();
         initPasswordProtection();
@@ -77,11 +82,11 @@ public class MainActivity extends Activity {
     }
 
     private void initPasswordProtection(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences( getApplicationContext() );
-        if( preferences.getBoolean( getString( R.string.KEY_PASSWORD_SET ), false ) ){
+        //SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences( getApplicationContext() );
+        if( mPreferences.getBoolean( getString( R.string.KEY_PASSWORD_SET ), false ) ){
             return;
         } else {
-            SharedPreferences.Editor editor = preferences.edit();
+            SharedPreferences.Editor editor = mPreferences.edit();
             editor.putBoolean( getString( R.string.KEY_PASSWORD_SET ), true );
             editor.putString( getString( R.string.KEY_PASSWORD ), "fhws" );
             editor.commit();
@@ -131,8 +136,8 @@ public class MainActivity extends Activity {
     }
 
     private boolean isPasswordCorrect( String password ){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences( getApplicationContext() );
-        if( preferences.getString( getString( R.string.KEY_PASSWORD ), "" ).equals( password ) )
+        //SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences( getApplicationContext() );
+        if( mPreferences.getString( getString( R.string.KEY_PASSWORD ), "" ).equals( password ) )
             return true;
         return false;
     }
@@ -148,9 +153,9 @@ public class MainActivity extends Activity {
     }
 
     private void changeNfcState(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences( this );
+        //SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences( getApplicationContext() );
         /*
-        if( preferences.getBoolean( getString( R.string.KEY_DISABLE_NFC ), false  ) ) {
+        if( mPreferences.getBoolean( getString( R.string.KEY_DISABLE_NFC ), false  ) ) {
             PackageManager pm = getPackageManager();
             pm.setApplicationEnabledSetting( "com.android.nfc", PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP );
         } else {
@@ -160,10 +165,12 @@ public class MainActivity extends Activity {
         */
     }
 
+    public SharedPreferences getPreferences(){
+        return mPreferences;
+    }
+
     public static class MainFragment extends PreferenceFragment
         implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
-
-        private SharedPreferences mPreferences;
 
         private CheckBoxPreference mWifiDisabled;
         private CheckBoxPreference mBluetoothDisabled;
@@ -172,6 +179,8 @@ public class MainActivity extends Activity {
         private Preference mDeactviatedApps;
         private EditTextPreference mChangePassword;
 
+        private SharedPreferences mPreferences;
+
         @Override
         public void onCreate( Bundle savedInstance ){
             super.onCreate( savedInstance );
@@ -179,7 +188,9 @@ public class MainActivity extends Activity {
             addPreferencesFromResource( R.xml.preferences );
 
             // get sharedpreferences
-            mPreferences = PreferenceManager.getDefaultSharedPreferences( getActivity().getApplicationContext() );
+            //SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences( getActivity().getApplicationContext() );
+
+            mPreferences = ( ( MainActivity ) getActivity() ).getPreferences();
 
             mWifiDisabled = ( CheckBoxPreference ) findPreference( getString( R.string.KEY_DISABLE_WIFI ) );
             mWifiDisabled.setOnPreferenceChangeListener( this );
@@ -209,8 +220,8 @@ public class MainActivity extends Activity {
 
         @Override
         public boolean onPreferenceChange(Preference preference, Object o) {
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences( getActivity().getApplicationContext() );
-            SharedPreferences.Editor editor = preferences.edit();
+            //SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences( getActivity().getApplicationContext() );
+            SharedPreferences.Editor editor = mPreferences.edit();
 
             if( mChangePassword == preference ){
                 String newPassword = ( String ) o;
@@ -223,22 +234,27 @@ public class MainActivity extends Activity {
 
         @Override
         public boolean onPreferenceClick(Preference preference) {
-            SharedPreferences.Editor editor = mPreferences.edit();
+            //SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences( getActivity().getApplicationContext() );
+
+            Log.d( TAG, "Preference clicked.");
 
             if( mWifiDisabled == preference ){
                 boolean oldValue = mPreferences.getBoolean( getString( R.string.KEY_DISABLE_WIFI ), false );
                 mWifiDisabled.setChecked( !oldValue );
                 // write update
+                SharedPreferences.Editor editor = mPreferences.edit();
                 editor.putBoolean( getString( R.string.KEY_DISABLE_WIFI ), !oldValue );
                 editor.commit();
             } else if( mBluetoothDisabled == preference ){
                 boolean oldValue = mPreferences.getBoolean( getString( R.string.KEY_DISABLE_BLUETOOTH ), false );
                 mBluetoothDisabled.setChecked( !oldValue );
+                SharedPreferences.Editor editor = mPreferences.edit();
                 editor.putBoolean( getString( R.string.KEY_DISABLE_BLUETOOTH ), !oldValue );
                 editor.commit();
             } else if( mNfcDisabled == preference ){
                 boolean oldValue = mPreferences.getBoolean( getString( R.string.KEY_DISABLE_NFC ), false );
                 mNfcDisabled.setChecked( !oldValue );
+                SharedPreferences.Editor editor = mPreferences.edit();
                 editor.putBoolean( getString( R.string.KEY_DISABLE_NFC ), !oldValue );
                 editor.commit();
             } else if( mHiddenApps == preference ) {

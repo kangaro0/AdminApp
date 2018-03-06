@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.2">
-  <zoom_level>10</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>40</x>
-      <y>70</y>
-      <w>330</w>
-      <h>210</h>
+      <x>21</x>
+      <y>119</y>
+      <w>231</w>
+      <h>147</h>
     </coordinates>
     <panel_attributes>*MainActivity*
 --
@@ -27,10 +27,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>20</x>
-      <y>370</y>
-      <w>370</w>
-      <h>250</h>
+      <x>7</x>
+      <y>329</y>
+      <w>259</w>
+      <h>175</h>
     </coordinates>
     <panel_attributes>*MainFragment*
 --
@@ -50,10 +50,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>270</y>
-      <w>70</w>
-      <h>120</h>
+      <x>112</x>
+      <y>259</y>
+      <w>49</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
@@ -64,10 +64,10 @@ has &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>470</x>
+      <x>749</x>
       <y>70</y>
-      <w>310</w>
-      <h>70</h>
+      <w>217</w>
+      <h>49</h>
     </coordinates>
     <panel_attributes>*PackageActivity*
 --
@@ -78,12 +78,12 @@ has &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>430</x>
-      <y>220</y>
-      <w>360</w>
-      <h>200</h>
+      <x>609</x>
+      <y>175</y>
+      <w>252</w>
+      <h>140</h>
     </coordinates>
-    <panel_attributes>*PackageFragment*
+    <panel_attributes>*PackageHideFragment*
 --
 - PackageProviderAdapter mProviderAdapter
 --
@@ -99,10 +99,10 @@ has &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>790</x>
-      <y>430</y>
-      <w>340</w>
-      <h>340</h>
+      <x>616</x>
+      <y>616</y>
+      <w>217</w>
+      <h>238</h>
     </coordinates>
     <panel_attributes>*PackageProvider*
 --
@@ -131,10 +131,10 @@ _- String CREATE_DB_TABLE_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>430</x>
-      <y>500</y>
-      <w>290</w>
-      <h>270</h>
+      <x>630</x>
+      <y>371</y>
+      <w>203</w>
+      <h>189</h>
     </coordinates>
     <panel_attributes>*PackageProviderAdapter*
 --
@@ -157,10 +157,10 @@ _- Uri CONTENT_URL_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>630</y>
-      <w>240</w>
-      <h>140</h>
+      <x>889</x>
+      <y>595</y>
+      <w>168</w>
+      <h>98</h>
     </coordinates>
     <panel_attributes>*Package*
 --
@@ -176,10 +176,24 @@ _- Uri CONTENT_URL_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>620</x>
-      <y>130</y>
+      <x>742</x>
+      <y>112</y>
       <w>70</w>
-      <h>110</h>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=  0..1
+has &gt;</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>728</x>
+      <y>308</y>
+      <w>49</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
@@ -190,43 +204,159 @@ has &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>410</y>
-      <w>70</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes>lt=-
-m1=1
-m2=1
-has &gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>300</x>
-      <y>670</y>
-      <w>150</w>
-      <h>50</h>
+      <x>826</x>
+      <y>525</y>
+      <w>77</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=0..n
-&lt; has </panel_attributes>
-    <additional_attributes>130.0;20.0;10.0;20.0</additional_attributes>
+has &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0;40.0;160.0;90.0;160.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
-      <y>540</y>
-      <w>100</w>
-      <h>50</h>
+      <x>721</x>
+      <y>553</y>
+      <w>49</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=1
-&lt; has</panel_attributes>
-    <additional_attributes>10.0;20.0;80.0;20.0</additional_attributes>
+has &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>889</x>
+      <y>175</y>
+      <w>238</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>*PackageDeactivateFragment*
+--
++ onCreate( Bundle savedInstance ): void
++ onCreateView( .. ): View
++ onActivityCreated( Bundle savedInstance ): void
++ onPause( ): void
++ onListItemClicked( .. ): void
+- renewListAdapter( ): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>924</x>
+      <y>112</y>
+      <w>91</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=      1
+m2=0..1
+        has &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>861</x>
+      <y>371</y>
+      <w>315</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>*PackageAdapter*
+--
++ PackageAdapter( Context con, ArrayList&lt;Package&gt; packages ): void
++ getView( .. ): View
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>861</x>
+      <y>469</y>
+      <w>315</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>*PackageHelper*
+--
++ INSTALLED( Context context ): ArrayList&lt;Package&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>812</x>
+      <y>308</y>
+      <w>91</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=      1
+m2=1
+        has &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;110.0;40.0;110.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>763</x>
+      <y>308</y>
+      <w>112</w>
+      <h>217</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=      1
+m2=1
+        has &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0;110.0;70.0;110.0;280.0;140.0;280.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1022</x>
+      <y>308</y>
+      <w>49</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+has &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1092</x>
+      <y>308</y>
+      <w>133</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+has &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;170.0;60.0;170.0;270.0;120.0;270.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>959</x>
+      <y>532</y>
+      <w>49</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..n
+has &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
   </element>
 </diagram>
