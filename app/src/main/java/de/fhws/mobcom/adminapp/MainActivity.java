@@ -65,13 +65,25 @@ public class MainActivity extends Activity {
         initReceiver();
         initPasswordProtection();
 
+        showPasswordDialog().show();
+
         getFragmentManager().beginTransaction().replace( R.id.activity_main, new MainFragment() ).commit();
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        showPasswordDialog().show();
+
+        MainApplication app = ( MainApplication ) getApplication();
+        if( app.wasInBackground() )
+            showPasswordDialog().show();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+
+        ( ( MainApplication ) getApplication() ).startActivityTransitionTimer();
     }
 
     @Override
@@ -113,6 +125,12 @@ public class MainActivity extends Activity {
         builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                finishAffinity();
+            }
+        });
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
                 finishAffinity();
             }
         });

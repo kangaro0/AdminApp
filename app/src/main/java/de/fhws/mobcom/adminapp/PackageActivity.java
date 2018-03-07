@@ -8,6 +8,8 @@ import android.util.Log;
 
 public class PackageActivity extends Activity {
 
+    private static final String TAG = PackageActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +19,8 @@ public class PackageActivity extends Activity {
     @Override
     public void onResume(){
         super.onResume();
+
+        Log.d( TAG, "onResume()" );
 
         Intent intent = getIntent();
         FragmentManager fm = getFragmentManager();
@@ -28,7 +32,18 @@ public class PackageActivity extends Activity {
             PackageDeactivateFragment fragment = new PackageDeactivateFragment();
             fm.beginTransaction().replace( R.id.activity_package, fragment ).commit();
         }
+
+        MainApplication app = ( MainApplication ) getApplication();
+        app.stopActivityTransitionTimer();
     }
 
+    @Override
+    public void onPause(){
+        super.onPause();
+
+        Log.d( TAG, "onPause()" );
+
+        ( ( MainApplication ) getApplication() ).startActivityTransitionTimer();
+    }
 
 }
