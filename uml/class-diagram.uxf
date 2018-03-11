@@ -4,18 +4,18 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>20</x>
-      <y>70</y>
+      <x>100</x>
+      <y>310</y>
       <w>330</w>
-      <h>210</h>
+      <h>200</h>
     </coordinates>
     <panel_attributes>*MainActivity*
 --
 - BroadcastReceiver mReceiver
 --
-# onCreate( Bundle savedInstance )
-# onResume( ): void
-# onDestroy( ): void
++ onCreate( Bundle savedInstance )
++ onResume( ): void
++ onDestroy( ): void
 - initPasswordProtection( ): void
 - showPasswordDialog( ): void
 - showPasswordDenied( ): void
@@ -27,10 +27,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>370</y>
+      <x>80</x>
+      <y>580</y>
       <w>370</w>
-      <h>250</h>
+      <h>210</h>
     </coordinates>
     <panel_attributes>*MainFragment*
 --
@@ -39,6 +39,7 @@
 - CheckBoxPreference mBluetoothDisabled
 - CheckBoxPreference mNfcDisabled
 - Preference mHiddenApps
+- Preference mDeactivatedApps
 - EditTextPreference mChangePassword
 --
 + onCreate( Bundle savedInstance ): void
@@ -50,36 +51,37 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>150</x>
-      <y>270</y>
+      <x>230</x>
+      <y>500</y>
       <w>70</w>
-      <h>120</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=1
 has &gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1060</x>
-      <y>0</y>
+      <x>940</x>
+      <y>180</y>
       <w>310</w>
-      <h>70</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>*PackageActivity*
 --
-# onCreate( Bundle savedInstance ): void
-</panel_attributes>
++ onCreate( Bundle savedInstance ): void
++ onResume( ): void
++ onPause( ): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>860</x>
-      <y>150</y>
+      <x>740</x>
+      <y>330</y>
       <w>360</w>
       <h>200</h>
     </coordinates>
@@ -99,8 +101,8 @@ has &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>870</x>
-      <y>770</y>
+      <x>750</x>
+      <y>950</y>
       <w>310</w>
       <h>340</h>
     </coordinates>
@@ -131,8 +133,8 @@ _- String CREATE_DB_TABLE_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>890</x>
-      <y>430</y>
+      <x>770</x>
+      <y>610</y>
       <w>290</w>
       <h>270</h>
     </coordinates>
@@ -157,8 +159,8 @@ _- Uri CONTENT_URL_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1260</x>
-      <y>750</y>
+      <x>1140</x>
+      <y>930</y>
       <w>240</w>
       <h>140</h>
     </coordinates>
@@ -176,22 +178,22 @@ _- Uri CONTENT_URL_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1050</x>
-      <y>60</y>
+      <x>930</x>
+      <y>250</y>
       <w>100</w>
-      <h>110</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=  0..1
 has &gt;</panel_attributes>
-    <additional_attributes>70.0;10.0;10.0;90.0</additional_attributes>
+    <additional_attributes>70.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1030</x>
-      <y>340</y>
+      <x>910</x>
+      <y>520</y>
       <w>70</w>
       <h>110</h>
     </coordinates>
@@ -204,8 +206,8 @@ has &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1170</x>
-      <y>650</y>
+      <x>1050</x>
+      <y>830</y>
       <w>110</w>
       <h>190</h>
     </coordinates>
@@ -218,8 +220,8 @@ has &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1020</x>
-      <y>690</y>
+      <x>900</x>
+      <y>870</y>
       <w>70</w>
       <h>100</h>
     </coordinates>
@@ -232,8 +234,8 @@ has &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1260</x>
-      <y>150</y>
+      <x>1140</x>
+      <y>330</y>
       <w>340</w>
       <h>200</h>
     </coordinates>
@@ -250,22 +252,22 @@ has &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1310</x>
-      <y>60</y>
+      <x>1190</x>
+      <y>250</y>
       <w>130</w>
-      <h>110</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=      1
 m2=0..1
         has &gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;110.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;110.0;80.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1220</x>
-      <y>430</y>
+      <x>1100</x>
+      <y>610</y>
       <w>450</w>
       <h>110</h>
     </coordinates>
@@ -279,8 +281,8 @@ m2=0..1
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1220</x>
-      <y>570</y>
+      <x>1100</x>
+      <y>750</y>
       <w>450</w>
       <h>100</h>
     </coordinates>
@@ -292,8 +294,8 @@ m2=0..1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1150</x>
-      <y>340</y>
+      <x>1030</x>
+      <y>520</y>
       <w>130</w>
       <h>110</h>
     </coordinates>
@@ -306,8 +308,8 @@ m2=1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1080</x>
-      <y>340</y>
+      <x>960</x>
+      <y>520</y>
       <w>160</w>
       <h>310</h>
     </coordinates>
@@ -320,8 +322,8 @@ m2=1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1450</x>
-      <y>340</y>
+      <x>1330</x>
+      <y>520</y>
       <w>70</w>
       <h>110</h>
     </coordinates>
@@ -334,8 +336,8 @@ has &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1550</x>
-      <y>340</y>
+      <x>1430</x>
+      <y>520</y>
       <w>160</w>
       <h>300</h>
     </coordinates>
@@ -348,8 +350,8 @@ has &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1360</x>
-      <y>660</y>
+      <x>1240</x>
+      <y>840</y>
       <w>70</w>
       <h>110</h>
     </coordinates>
@@ -358,5 +360,28 @@ m1=1
 m2=0..n
 has &gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>0</y>
+      <w>370</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>*MainApplication*
+--
+- mActivityTransitionTimer: Timer
+- mActivityTimerTask: TimerTask
+- mWasInBackground: boolean
+--
++ onCreate( ): void
++ onLowMemory( ): void
++ onConfigurationChanged( Configuration config ): void 
++ startAcitivityTransitionTimer( ): void
++ stopAcitivityTransitionTimer( ): void
++ wasInBackground( boolean bool ): void
++ wasInBackground( ): boolean</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

@@ -65,7 +65,7 @@ public class PackageDeactivateFragment extends ListFragment {
     }
 
     public void renewListAdapter(){
-        ArrayList<Package> installed = PackageHelper.INSTALLED( getContext() );
+        ArrayList<Package> installed = PackageHelper.LAUNCHABLE( getContext() );
 
         // check all applications if they are activated
         PackageManager pm = getContext().getPackageManager();
