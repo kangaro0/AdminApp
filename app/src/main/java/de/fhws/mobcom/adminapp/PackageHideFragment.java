@@ -75,7 +75,7 @@ public class PackageHideFragment extends ListFragment {
     }
 
     private void renewListAdapter(){
-        ArrayList<Package> packages = PackageHelper.INSTALLED( getContext() );
+        ArrayList<Package> packages = PackageHelper.LAUNCHABLE( getContext() );
         ArrayList<Package> hidden = mProviderAdapter.getAll();
 
         Log.d( TAG, "Installed apps: " + packages.size() );
