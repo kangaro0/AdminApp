@@ -46,7 +46,7 @@ public class PackageHelper {
         Intent mainIntent = new Intent( Intent.ACTION_MAIN, null );
         mainIntent.addCategory( Intent.CATEGORY_LAUNCHER );
 
-        List<ResolveInfo> list = pm.queryIntentActivities( mainIntent, 0 );
+        List<ResolveInfo> list = pm.queryIntentActivities( mainIntent, 0 | PackageManager.MATCH_DISABLED_COMPONENTS );
         Collections.sort( list, new ResolveInfo.DisplayNameComparator( pm ) );
 
         for( ResolveInfo rInfo : list ){
