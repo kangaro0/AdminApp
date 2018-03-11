@@ -52,7 +52,7 @@ public class PackageHelper {
         for( ResolveInfo rInfo : list ){
             Package curPackage = new Package(
                     null,
-                    rInfo.resolvePackageName,
+                    rInfo.activityInfo.packageName,
                     rInfo.loadLabel( pm ).toString(),
                     rInfo.loadIcon( pm )
             );

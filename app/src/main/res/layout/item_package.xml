@@ -17,17 +17,9 @@
             android:id="@+id/appLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
+            android:textSize="16sp"
             android:paddingTop="2dp"
             android:layout_toRightOf="@id/appIcon"
-            />
-        <TextView
-            android:id="@+id/appName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/appIcon"
-            android:layout_below="@id/appLabel"
-            android:textSize="10sp"
             />
     </RelativeLayout>
     <CheckBox
